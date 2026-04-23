@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Multimedia — Tech Community</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="CSS/gallery.css"
-</head>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="CSS/gallery.css" </head>
+
 <body>
 
   <nav>
-    <a href="./index.html" class="nav-logo">TC<span>/</span>multimedia</a>
+    <a href="./index.html" class="nav-logo">CL<span>Multimedia</span></a>
     <div class="nav-links">
       <a href="./index.html">Beranda</a>
       <a href="./form.html">Daftar</a>
@@ -21,7 +24,8 @@
   <div class="main-wrap">
     <div class="page-tag">Galeri Multimedia</div>
     <h1>Konten Visual &<br />Audio Community</h1>
-    <p class="subtitle">Jelajahi konten multimedia Tech Community — dari galeri foto, video inspiratif, hingga audio podcast komunitas kami.</p>
+    <p class="subtitle">Jelajahi konten multimedia Tech Community — dari galeri foto, video inspiratif, hingga audio
+      podcast komunitas kami.</p>
 
     <!-- IMAGE SECTION -->
     <div class="section-header">
@@ -36,7 +40,9 @@
       </div>
       <div class="media-card-body">
         <div class="image-showcase">
-          <img id="galleryImg" src="https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=900&auto=format&fit=crop&q=80" alt="Tech Community" />
+          <img id="galleryImg"
+            src="https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=900&auto=format&fit=crop&q=80"
+            alt="Tech Community" />
         </div>
         <p class="image-caption" id="imgCaption">Tech workspace modern — tempat inspirasi & kolaborasi</p>
         <div class="image-controls">
@@ -60,10 +66,7 @@
       </div>
       <div class="media-card-body">
         <div class="video-wrapper">
-          <iframe
-            id="ytFrame"
-            src="https://www.youtube.com/embed/eIho2S0ZahI?rel=0"
-            title="Tech Community Video"
+          <iframe id="ytFrame" src="https://www.youtube.com/embed/eIho2S0ZahI?rel=0" title="Tech Community Video"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen>
           </iframe>
@@ -106,7 +109,8 @@
             <button class="btn btn-ghost" onclick="stopAudio()">⏹ Stop</button>
             <div class="vol-control">
               <span>🔊</span>
-              <input type="range" id="volSlider" min="0" max="1" step="0.05" value="1" oninput="setVolume(this.value)" />
+              <input type="range" id="volSlider" min="0" max="1" step="0.05" value="1"
+                oninput="setVolume(this.value)" />
             </div>
             <span id="audioStatus">⏸ Dihentikan</span>
           </div>
@@ -123,4 +127,5 @@
   <script src="JS/gallery.js"></script>
 
 </body>
+
 </html>
