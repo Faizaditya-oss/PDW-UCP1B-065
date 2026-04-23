@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daftar Anggota — Tech Community</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="CSS/form.css">
+  
+</head>
+<body>
+
+  <nav>
+    <a href="./index.html" class="nav-logo">TC<span>/</span>daftar</a>
+    <div class="nav-links">
+      <a href="./index.html">Beranda</a>
+      <a href="./form.html" class="active">Daftar</a>
+      <a href="./gallery.html">Multimedia</a>
+    </div>
+  </nav>
+
+  <div class="main-wrap">
+    <div class="page-tag">Pendaftaran Anggota</div>
+    <h1>Bergabung dengan<br />Tech Community</h1>
+    <p class="subtitle">Isi form di bawah untuk mendaftarkan diri sebagai anggota baru. Data kamu akan ditampilkan di halaman utama.</p>
+
+    <div class="form-card">
+      <div class="form-group">
+        <label for="nama">Nama Lengkap</label>
+        <input type="text" id="nama" placeholder="Masukkan nama lengkap kamu" />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Alamat Email</label>
+        <input type="email" id="email" placeholder="nama@email.com" />
+      </div>
+
+      <div class="form-group">
+        <label for="minat">Bidang Minat</label>
+        <div class="select-wrap">
+          <select id="minat">
+            <option value="" disabled selected>Pilih bidang minat</option>
+            <option value="Web Development">Web Development</option>
+            <option value="Mobile Development">Mobile Development</option>
+            <option value="UI/UX Design">UI/UX Design</option>
+            <option value="Data Science">Data Science</option>
+            <option value="Machine Learning">Machine Learning</option>
+            <option value="Cybersecurity">Cybersecurity</option>
+            <option value="DevOps">DevOps</option>
+            <option value="Game Development">Game Development</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-primary" onclick="submitForm()">Daftarkan Saya</button>
+        <a href="./index.html" class="btn btn-outline">← Kembali ke Beranda</a>
+      </div>
+
+      <!-- Result Box -->
+      <div id="resultBox">
+        <div class="result-title">✓ Data berhasil disimpan</div>
+        <div class="result-grid" id="resultGrid"></div>
+      </div>
+    </div>
+
+    <!-- Daftar anggota baru sesi ini -->
+    <div id="listSection" style="display:none;">
+      <div class="section-header">
+        <span class="section-title">Anggota Baru Sesi Ini</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="member-list" id="memberList"></div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2026 Tech Community &mdash; Dibangun dengan HTML, CSS & JavaScript
+  </footer>
+
+  <script>
+    // Array penyimpanan sementara
+    let anggotaBaru = [];
+
+    // Ambil data dari sessionStorage jika ada
+    try {
+      anggotaBaru = JSON.parse(sessionStorage.getItem('anggotaBaru') || '[]');
+    } catch(e) {}
+
+    function submitForm() {
+      const nama  = document.getElementById('nama').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const minat = document.getElementById('minat').value;
+
+      if (!nama || !email || !minat) {
+        alert('⚠️ Semua field wajib diisi!');
+        return;
+      }
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        alert('⚠️ Format email tidak valid!');
+        return;
+      }
+
+      const anggota = { nama, email, minat };
+      anggotaBaru.push(anggota);
+
+      // Simpan ke sessionStorage agar index.html bisa baca
+      try {
+        sessionStorage.setItem('anggotaBaru', JSON.stringify(anggotaBaru));
+      } catch(e) {}
+
+      // Tampilkan result box
+      document.getElementById('resultGrid').innerHTML = `
+        <div class="result-row">
+          <span class="result-key">Nama</span>
+          <span>${nama}</span>
+        </div>
+        <div class="result-row">
+          <span class="result-key">Email</span>
+          <span>${email}</span>
+        </div>
+        <div class="result-row">
+          <span class="result-key">Minat</span>
+          <span>${minat}</span>
+        </div>
+      `;
+      const box = document.getElementById('resultBox');
+      box.style.display = 'block';
+
+      // Reset form
+      document.getElementById('nama').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('minat').value = '';
+
+      // Render list
+      renderList();
+    }
+
+    function renderList() {
+      if (anggotaBaru.length === 0) return;
+      document.getElementById('listSection').style.display = 'block';
+      const list = document.getElementById('memberList');
+      list.innerHTML = '';
+      anggotaBaru.slice().reverse().forEach(a => {
+        const initials = a.nama.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+        list.innerHTML += `
+          <div class="member-item">
+            <div class="member-avatar">${initials}</div>
+            <div class="member-info">
+              <div class="member-name">${a.nama}</div>
+              <div class="member-email">${a.email}</div>
+            </div>
+            <span class="badge">${a.minat}</span>
+          </div>`;
+      });
+    }
+
+    // Render data yang sudah ada saat halaman dibuka
+    renderList();
+  </script>
+
+</body>
+</html>
